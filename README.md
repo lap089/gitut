@@ -8,11 +8,8 @@
 * E-mail:  
   ```git config --global user.email "your@email.com"```
 * Editor:  
-  ```
-  git config --global core.editor editor-shortcut
-  
-  git config --global core.editor "path/to/your/edtitor"
-  ```
+  ```git config --global core.editor editor-shortcut```  
+  ```git config --global core.editor "path/to/your/edtitor"```
 * Get a specific configuration:  
   ```git config [field]```
 * List all configrations:  
@@ -22,8 +19,96 @@
 * Initialize current folder for Git system: (required to be an empty folder)  
   ```git init```
 * Initialize a new child folder (of current one) for Git system:  
-  ```git init [folder-name]```
+  ```git init [path]```
 * Clone an existing repository to current folder: (empty folder required)  
   ```git clone [repository-url]```
 * Clone an existing repository to a child folder of current: (empty folder required)  
-  ```git cloen [repository-url] [folder-name]```
+  ```git clone [repository-url] [path]```
+
+### Git Lifecycle
+* Overview:
+
+![Git lifecycle](https://git-scm.com/book/en/v2/book/02-git-basics/images/lifecycle.png)
+
+* Add a file to staged: (from both untracked and modified)
+  * A specific folder/file:  
+    ```git add [path]```
+  * Everything:  
+    ```git add [ * | . | -A ]```
+  * Everything except _removed_ files:  
+    ```git add --ignore-removal .```
+  * Everything except _new_ files: (```-u``` stands for "update")  
+    ```git add -u```
+* Removal:  
+  * Remove a file completely from staged or unmodified area and stage that removal:  
+    * Productive way:  
+      ```git rm [path]```
+    * Traditional way:  
+    ```rm [path]```  
+    ```git add [path]```
+  * Remove a file from staged area only:   
+    ```git rm --cached [path]```
+* Unstage:
+  * A file:  
+    ```git reset [path]```
+  * Everything:  
+    ```git reset```
+* Undo everything and revert back to the latest commit:  
+  ```git reset --hard```
+* Move a file from one place to another and stage it:
+  * Productive way:  
+  ```git mv [from-path] [to-path]```
+  * Traditional way:  
+    ```mv [from-path] [to-path]```  
+    ```git rm [from-path]```  
+    ```git add [to-path]```
+* Commit from staged to unmodified:
+  * Commit with an inline message:  
+    ```git commit -m```
+  * Commit with a pop-up editor (specified by core.editor):  
+    ```git commit```
+  * Commit by replacing the last commit:  
+    ```git commit [ | -m ] --amend```
+* Check status of current workspace:
+  * Status of workspace in general:  
+    ```git status```
+  * Log of commits throughout the history:  
+    ```git log [ | -p | --stat | --pretty ]```
+    * ```-p```: difference between each commits.
+    * ```--stat```: how many lines are modified, inserted or removed
+    * ```--pretty```: show logs with specified format. Go [here](https://git-scm.com/docs/pretty-formats) for more infos.
+
+### Git Branch
+* Create a new branch:   
+  ```git branch [branch-name]```
+* Switch to another branch:  
+  * Requirements for switching is current workspace must be clean.  
+    No untracked files or modified files that haven't been committed.
+  * If a branch already exists:  
+  ```git checkout [branch-name]```
+  * If a branch does not exist and it should be created:
+    * Productive way:  
+      ```git checkout -b [branch-name]```
+    * Traditional way:  
+      ```git branch [branch-name]```  
+      ```git checkout [branch-name]```
+* Merge work from ```[branch-name]``` to current branch:  
+  ```git merge [branch-name]```
+  * Conflicts:  
+  ```<<<<<<< HEAD:[conflicted-file]```   
+  ```[Code exists in current-branch]```  
+  ``` ======= ```  
+  ```[Code exists in branch-name]```  
+  ```>>>>>>> [branch-name]:[conflicted-file]```
+    * Resolve conflicts and remove ```<<<<<<<```, ``` ======= ``` and ```>>>>>>>```.
+    * Add the ```[conflicted-file]``` to staged and then it is merged.
+* Delete a branch:
+  ```git branch [ -d | -D ] [branch-name]```
+  * ```-d```: delete a branch but canceled if that branch is not merged to its parent (with warning).
+  * ```-D```: force a delete on a branch (without any warning)
+* List all branches:  
+  ```git branch [ | -v | --merged | --no-merged ]```
+  * ```-v```: show branches with their last commits
+  * ```--merged```: branches merged to current branch.
+  * ```--no-merged```: branches not merged to current branch.
+## Workflow
