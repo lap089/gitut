@@ -27,9 +27,3 @@
   ```git clone [repository-url]```
 * Clone an existing repository to a child folder of current: (empty folder required)  
   ```git cloen [repository-url] [folder-name]```
-
-### Git Lifecycle
-* Overview:
-* 
-
-## Workflow
