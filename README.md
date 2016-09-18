@@ -46,7 +46,7 @@
     * Traditional way:  
     ```rm [path]```  
     ```git add [path]```
-  * Remove ```[path]``` in the next commit but there is a whole new file which is untracked.
+  * Remove ```[path]``` in the next commit but there is a whole new file which is untracked.  
     ```git rm --cached [path]```
 * Unstage:
   * A file:  
