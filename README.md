@@ -81,6 +81,11 @@
 ### Git Branch
 * Create a new branch:   
   ```git branch [branch-name]```
+* Rename a branch:
+  * Current branch:  
+    ```git branch -m [new-name]```
+  * Another branch: 
+    ```git branch -m [new-name] [branch-name```
 * Switch to another branch:  
   * Requirements for switching is current workspace must be clean.  
     No untracked files or modified files that haven't been committed.
@@ -111,4 +116,28 @@
   * ```-v```: show branches with their last commits
   * ```--merged```: branches merged to current branch.
   * ```--no-merged```: branches not merged to current branch.
+* Branch is just an alias for a commit. Therefore, `checkout` can be applied to move HEAD to a commit:  
+  ```git checkout [commit-id]```
+  * Checking out this way results in "detaching" HEAD from branches (no branch is attached with HEAD).
+    * Create a new branch and that branch is attached to current commit with HEAD.
+    * Otherwise, any new commit is not tracked by any branch but HEAD's history can be shown to see it:  
+      ```git reflog```
+* Stash: save all working tree and the staged area (the index) to a "safe" place
+  ```git stash [ | save ]```
+  * Show shashes:
+    * All stashes:  
+      ```git stash list```
+    * A stash:
+      ```git stash show stash@{i}```
+  * Apply a stash:
+    * Most recent one:
+      ```git stash apply```
+    * At a stash history: (with the format `stash@{i}`, retrieved from `git stash show`)
+      ```git stash apply stash@{i}```
+  * Drop a stash:
+    * Most recent one:  
+      ```git stash drop```
+    * At a stash history:  
+      ```git stash drop stash@{i}```
+
 ## Workflow
