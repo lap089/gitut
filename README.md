@@ -144,7 +144,7 @@
 
 These are simple scenarios when using Git.
 
-### Scenario 1<a name="s1"/>
+### Scenario 1
 
 There is no other branch than your `master`. You have not changed anything but want to make some (fix issue or add new features).
 
@@ -162,9 +162,9 @@ There is no other branch than your `master`. You have not changed anything but w
 8.  Repeat 3 to 6 until your request is approved.
 9.  Merge your pull request with the `master` (and resolve any conflicts if there are before merging).
 
-### Scenario 2<a name="s2"/>
+### Scenario 2
 
-During [Scenario 1](#s1) from step 3 to 8, if there is a severe problem that needs to be fixed and other cannot wait until you finish your job, do the following:
+During [Scenario 1](#scenario-1) from step 3 to 8, if there is a severe problem that needs to be fixed and other cannot wait until you finish your job, do the following:
 
 1.  Make sure your working tree is clean. (Everything is committed)  
 2.  Apply the same steps (1 to 9) in [Scenario 1](#s1).  
@@ -176,9 +176,9 @@ During [Scenario 1](#s1) from step 3 to 8, if there is a severe problem that nee
   ```git merge master```  
 6.  If you're working on children levels of `[branch-name]`, you can propagate updates the same way as above.
 
-### Scenario 3<a name="s3"/>
+### Scenario 3
 
-During [Scenario 1](#s1), if there's someone changed the `master` branch on remote, it is recommended that you should update yours to avoid resolve accumulated conflicts in the future (although you can do this at your convenience).
+During [Scenario 1](#scenario-1), if there's someone changed the `master` branch on remote, it is recommended that you should update yours to avoid resolve accumulated conflicts in the future (although you can do this at your convenience).
 
 1.  Make sure your working tree is clean. (Everything is committed)
 2.  Checkout `master` to update:
