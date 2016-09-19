@@ -141,3 +141,51 @@
       ```git stash drop stash@{i}```
 
 ## Workflow
+
+These are simple scenarios when using Git.
+
+### Scenario 1<a name="s1"/>
+
+There is no other branch than your `master`. You have not changed anything but want to make some (fix issue or add new features).
+
+1.  Create a new branch and check it out:  
+  ```git checkout -b [branch-name]```
+2.  Push it to remote Git so that others know you're working on a new branch:  
+  ```git push [remote] [remote-branch-name]```  
+  * If you don't have the `[remote-branch-name]` on `[remote]` yet, above command automatically creates that branch for you.
+3.  Fix issue/ Add new features.
+4.  Commit as soon as possible.
+5.  If the issue is fixed or new features are completed, go to 6. Otherwise, go back to 3.
+6.  Push local branch to remote branch:  
+  ```git push [remote] [remote-branch-name]```
+7.  Open a pull request so that responsible engineers can review or test your code.
+8.  Repeat 3 to 6 until your request is approved.
+9.  Merge your pull request with the `master` (and resolve any conflicts if there are before merging).
+
+### Scenario 2<a name="s2"/>
+
+During [Scenario 1](#s1) from step 3 to 8, if there is a severe problem that needs to be fixed and other cannot wait until you finish your job, do the following:
+
+1.  Make sure your working tree is clean. (Everything is committed)  
+2.  Apply the same steps (1 to 9) in [Scenario 1](#s1).  
+3.  Checkout `master` to update:  
+  ```git checkout master```  
+  ```git pull [remote] master```  
+5.  Checkout `[branch-name]` to update it from master:  
+  ```git checkout [branch-name]```  
+  ```git merge master```  
+6.  If you're working on children levels of `[branch-name]`, you can propagate updates the same way as above.
+
+### Scenario 3<a name="s3"/>
+
+During [Scenario 1](#s1), if there's someone changed the `master` branch on remote, it is recommended that you should update yours to avoid resolve accumulated conflicts in the future (although you can do this at your convenience).
+
+1.  Make sure your working tree is clean. (Everything is committed)
+2.  Checkout `master` to update:
+  ```git checkout master```  
+  ```git pull [remote] master```
+3.  Checkout `[branch-name]` to update it from master:
+  ```git checkout [branch-name]```
+  ```git merge master```
+4.  If you're working on children levels of `[branch-name]`, you can propagate updates the same way as above.
+
