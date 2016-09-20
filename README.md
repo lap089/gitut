@@ -16,13 +16,13 @@
   ```git config --list```
 
 ### Git workspace setup
-* Initialize current folder for Git system: (required to be an empty folder)  
+* **Initialize** current folder for Git system: (required to be an empty folder)  
   ```git init```
-* Initialize a new child folder (of current one) for Git system:  
+* **Initialize** a new child folder (of current one) for Git system:  
   ```git init [path]```
-* Clone an existing repository to current folder: (empty folder required)  
+* **Clone** an existing repository to _current_ folder: (empty folder required)  
   ```git clone [repository-url]```
-* Clone an existing repository to a child folder of current: (empty folder required)  
+* **Clone** an existing repository to a _child_ folder of current: (empty folder required)  
   ```git clone [repository-url] [path]```
 
 ### Git Lifecycle
@@ -30,76 +30,80 @@
 
 ![Git lifecycle](https://git-scm.com/book/en/v2/book/02-git-basics/images/lifecycle.png)
 
-* Add a file to staged: (from both untracked and modified)
-  * A specific folder/file:  
+* **Add** a file to staged: (from both untracked and modified)
+  * A specific _folder/file_:  
     ```git add [path]```
-  * Everything:  
+  * _Everything_:  
     ```git add [ * | . | -A ]```
-  * Everything except _removed_ files:  
+  * _Everything_ **except** _removed_ files:  
     ```git add --ignore-removal .```
-  * Everything except _new_ files: (```-u``` stands for "update")  
+  * _Everything_ **except** _new_ files: (```-u``` stands for "update")  
     ```git add -u```
-* Removal:  
-  * Remove a file completely from staged or unmodified area and stage that removal:  
-    * Productive way:  
+* **Removal**:  
+  * Remove a file completely from _staged_ or _unmodified_ area and _stage_ that removal:  
+    * As above: (recommended)  
       ```git rm [path]```
-    * Traditional way:  
+    * So below:  
     ```rm [path]```  
     ```git add [path]```
-  * Remove ```[path]``` in the next commit but there is a whole new file which is untracked.  
+  * Remove ```[path]``` in the _next commit_ but results in **new** file which is **untracked**.  
     ```git rm --cached [path]```
-* Unstage:
-  * A file:  
+* **Unstage**:
+  * A _file_:  
     ```git reset [path]```
-  * Everything:  
+  * _Everything_:  
     ```git reset```
-* Undo everything and revert back to the latest commit:  
-  ```git reset --hard```
-* Move a file from one place to another and stage it:
-  * Productive way:  
+* **Undo** everything and revert:  
+  ```git reset --hard [ | [commit] ]```
+  * `[ ]`: empty means revert to the latest commit.
+  * `[commit]`: revert to commit with SHA-1 hash ID `[commit]`
+* **Move** a file from one place to another and stage it: (also for **rename** purpose)
+  * As above: (recommended)  
   ```git mv [from-path] [to-path]```
-  * Traditional way:  
+  * So below:  
     ```mv [from-path] [to-path]```  
     ```git rm [from-path]```  
     ```git add [to-path]```
-* Commit from staged to unmodified:
-  * Commit with an inline message:  
+* **Commit** from staged to unmodified:
+  * Commit with an _inline_ message:  
     ```git commit -m```
-  * Commit with a pop-up editor (specified by core.editor):  
+  * Commit with a pop-up _editor_ (specified by core.editor):  
     ```git commit```
-  * Commit by replacing the last commit:  
+  * Commit by _replacing_ the last commit:  
     ```git commit [ | -m ] --amend```
-* Check status of current workspace:
+* Check **status** of current workspace:
   * Status of workspace in general:  
     ```git status```
   * Log of commits throughout the history:  
     ```git log [ | -p | --stat | --pretty ]```
-    * ```-p```: difference between each commits.
-    * ```--stat```: how many lines are modified, inserted or removed
-    * ```--pretty```: show logs with specified format. Go [here](https://git-scm.com/docs/pretty-formats) for more infos.
+    * ```-p```: _difference_ between each commits.
+    * ```--stat```: how many _lines_ are modified, inserted or removed
+    * ```--pretty```: show logs with specified _format_. Go [here](https://git-scm.com/docs/pretty-formats) for more infos.
+    * **Trick**:
+      ```git log --oneline --all --graph --decorate```
 
 ### Git Branch
-* Create a new branch:   
+* **Create** a new branch:   
   ```git branch [branch-name]```
-* Rename a branch:
-  * Current branch:  
+* **Rename** a branch:
+  * _Current_ branch:  
     ```git branch -m [new-name]```
-  * Another branch: 
+  * _Another_ branch: 
     ```git branch -m [new-name] [branch-name```
-* Switch to another branch:  
-  * Requirements for switching is current workspace must be clean.  
+* **Switch** to another branch:  
+  * _Requirements_ for switching is current workspace must be **clean**.  
     No untracked files or modified files that haven't been committed.
-  * If a branch already exists:  
+  * If a branch already _exists_:  
   ```git checkout [branch-name]```
-  * If a branch does not exist and it should be created:
-    * Productive way:  
+  * If a branch does _not exist_ and it should be created:
+    * As bove: (recommended)  
       ```git checkout -b [branch-name]```
-    * Traditional way:  
+    * So below:  
       ```git branch [branch-name]```  
       ```git checkout [branch-name]```
-* Merge work from ```[branch-name]``` to current branch:  
+* **Merge** work from `[branch-name]` to _current_ branch:  
   ```git merge [branch-name]```
-  * Conflicts:  
+  * **Conflicts**:  
   ```<<<<<<< HEAD:[conflicted-file]```   
   ```[Code exists in current-branch]```  
   ``` ======= ```  
@@ -107,34 +111,34 @@
   ```>>>>>>> [branch-name]:[conflicted-file]```
     * Resolve conflicts and remove ```<<<<<<<```, ``` ======= ``` and ```>>>>>>>```.
     * Add the ```[conflicted-file]``` to staged and then it is merged.
-* Delete a branch:
+* **Delete** a branch:
   ```git branch [ -d | -D ] [branch-name]```
-  * ```-d```: delete a branch but canceled if that branch is not merged to its parent (with warning).
-  * ```-D```: force a delete on a branch (without any warning)
-* List all branches:  
+  * ```-d```: delete a branch but canceled if that branch is not merged to its parent (with _warning_).
+  * ```-D```: _force_ a delete on a branch (without any warning)
+* **List** all branches:  
   ```git branch [ | -v | --merged | --no-merged ]```
   * ```-v```: show branches with their last commits
-  * ```--merged```: branches merged to current branch.
-  * ```--no-merged```: branches not merged to current branch.
-* Branch is just an alias for a commit. Therefore, `checkout` can be applied to move HEAD to a commit:  
+  * ```--merged```: branches _merged_ to current branch.
+  * ```--no-merged```: branches _not merged_ to current branch.
+* **Branch** is just an **alias** for a **commit**. Therefore, `checkout` can be applied to move `HEAD` to a commit:  
   ```git checkout [commit-id]```
-  * Checking out this way results in "detaching" HEAD from branches (no branch is attached with HEAD).
+  * Checking out this way results in "detaching" `HEAD` from branches (no branch is attached with HEAD).
     * Create a new branch and that branch is attached to current commit with HEAD.
-    * Otherwise, any new commit is not tracked by any branch but HEAD's history can be shown to see it:  
+    * Otherwise, any new commit is not tracked by any branch but `HEAD`'s **history** can be shown to see it:  
       ```git reflog```
-* Stash: save all working tree and the staged area (the index) to a "safe" place
+* **Stash**: _save_ all _working tree_ and the _staged area~ (the index) to a "safe" place
   ```git stash [ | save ]```
-  * Show shashes:
+  * _Show_ shashes:
     * All stashes:  
       ```git stash list```
     * A stash:
       ```git stash show stash@{i}```
-  * Apply a stash:
+  * _Apply_ a stash:
     * Most recent one:
       ```git stash apply```
     * At a stash history: (with the format `stash@{i}`, retrieved from `git stash show`)
       ```git stash apply stash@{i}```
-  * Drop a stash:
+  * _Drop_ a stash:
     * Most recent one:  
       ```git stash drop```
     * At a stash history:  
