@@ -143,6 +143,10 @@
       ```git stash drop```
     * At a stash history:  
       ```git stash drop stash@{i}```
+  * _Choose file to stash:
+      ```git stash -p```
+      
+
 
 ## Workflow
 
